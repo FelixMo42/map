@@ -51,7 +51,7 @@ function mousePressed() {
 
 function mouseDragged() {
     x -= oldMouseX - mouseX
-    y -= oldMouseY - mouseY
+    y += oldMouseY - mouseY
 
     oldMouseX = mouseX
     oldMouseY = mouseY
