@@ -51,7 +51,7 @@ function mousePressed() {
 
 function mouseDragged() {
     x -= oldMouseX - mouseX
-    y += oldMouseY - mouseY
+    y -= oldMouseY - mouseY
 
     oldMouseX = mouseX
     oldMouseY = mouseY
@@ -68,7 +68,7 @@ function mouseWheel(event) {
     scalechange = s - oldS
 
     x -= (window.innerWidth / 2) * scalechange / 2
-    y -= (window.innerHeight / 2) * scalechange / 2
+    y += (window.innerHeight / 2) * scalechange / 2
 
     cheakpos()
 
