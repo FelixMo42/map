@@ -1,0 +1,1 @@
+export const USER_AGENT = "average-people/1.0 (felix@tacocat.com)"
