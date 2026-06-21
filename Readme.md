@@ -1,6 +1,16 @@
 # Average People
 
+Imagine you could pick a random person. Who would they be? What would their lives look like? This project aims to help explore these question and move us towards a more accurate picture of what the real world population looks like.
+
+Currently it only picks the location based on the population density of the world, but many more data points are planned. If you are interested in contributing, feel free to open an issue or reach out to me!
+
+Enjoy!
+
 ## Usage
+
+requirements:
+- node.js
+- npm
 
 ```bash
 npm install
@@ -19,10 +29,10 @@ example output:
 
 ## Data Used
 
-- Geospatial Population Data[1]
-- OpenStreetMap reverse geocoding services[2]
+- Geospatial Population Data[^1]
+- OpenStreetMap reverse geocoding services[^2]
 
 ## Citations
 
-[1] Bondarenko M., Priyatikanto R., Tejedor-Garavito N., Zhang W., McKeen T., Cunningham A., Woods T., Hilton J., Cihan D., Nosatiuk B., Brinkhoff T., Tatem A., Sorichetta A.. 2025. The spatial distribution of population in 2015-2030 at a resolution of 30 arc (approximately 1km at the equator) R2025A version v1. Global Demographic Data Project - Funded by The Bill and Melinda Gates Foundation (INV-045237). WorldPop - School of Geography and Environmental Science, University of Southampton. DOI:10.5258/SOTON/WP00845
-[2] Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright
+[^1]: Bondarenko M., Priyatikanto R., Tejedor-Garavito N., Zhang W., McKeen T., Cunningham A., Woods T., Hilton J., Cihan D., Nosatiuk B., Brinkhoff T., Tatem A., Sorichetta A.. 2025. The spatial distribution of population in 2015-2030 at a resolution of 30 arc (approximately 1km at the equator) R2025A version v1. Global Demographic Data Project - Funded by The Bill and Melinda Gates Foundation (INV-045237). WorldPop - School of Geography and Environmental Science, University of Southampton. DOI:10.5258/SOTON/WP00845
+[^2]: Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright
