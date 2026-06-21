@@ -1,6 +1,7 @@
 import initGdalJs from 'gdal3.js/node.js';
 import { fromFile, GeoTIFFImage } from 'geotiff';
 import { mulberry32 } from './mulberry32.ts';
+import { USER_AGENT } from './config.ts';
 
 const MAP_FILE = 'data/map.tif'
 
@@ -48,6 +49,20 @@ async function weightedSample(image: GeoTIFFImage, id: number) {
     return best;
 }
 
+export async function getCountry({ lat, lon }: { lat: number, lon: number }) {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org` +
+        `/reverse?lat=${lat}&lon=${lon}&format=jsonv2`,
+        {
+            headers: {
+                "User-Agent": USER_AGENT,
+            },
+        }
+    );
+
+    return await response.json();
+}
+
 export async function getLocation(id: number) {
     const Gdal = await initGdalJs();
     const result = await Gdal.open(MAP_FILE);
@@ -74,16 +89,15 @@ export async function getLocation(id: number) {
             [[worldX, worldY]],
             ['-s_srs', info.projectionWkt, '-t_srs', 'EPSG:4326', '-output_xy'],
         );
-        const [longitude, latitude] = transformed[0];
+        const [lon, lat] = transformed[0];
+
+        const nominatim = await getCountry({ lat, lon });
 
         return {
-            longitude,
-            latitude,
-            populationWeight: sample.weight,
-            pixel: {
-                x: sample.x,
-                y: sample.y,
-            },
+            lon,
+            lat,
+            country_code: nominatim.address["country_code"],
+            "ISO3166-2-lvl4": nominatim.address["ISO3166-2-lvl4"],
         }
     } finally {
         await Gdal.close(dataset);
