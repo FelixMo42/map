@@ -1,7 +1,7 @@
 import initGdalJs from 'gdal3.js/node.js';
 import { fromFile, GeoTIFFImage } from 'geotiff';
-import { mulberry32 } from './mulberry32.ts';
-import { USER_AGENT } from './config.ts';
+import { mulberry32 } from '#src/mulberry32';
+import { USER_AGENT } from '#src/config';
 
 const MAP_FILE = 'data/map.tif'
 
