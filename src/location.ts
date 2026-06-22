@@ -2,8 +2,17 @@ import initGdalJs from 'gdal3.js/node.js';
 import { fromFile, GeoTIFFImage } from 'geotiff';
 import { mulberry32 } from '#src/mulberry32';
 import { USER_AGENT } from '#src/config';
+import { get as getCache, has as hasCache, set as setCache } from '#src/cache';
 
 const MAP_FILE = 'data/map.tif'
+const LOCATION_CACHE_VERSION = 'getLocation:v1';
+
+type Location = {
+    lon: number;
+    lat: number;
+    country_code: string;
+    'ISO3166-2-lvl4': string;
+};
 
 function pixelToWorld(geoTransform: number[], x: number, y: number) {
     return [
@@ -64,6 +73,11 @@ export async function getCountry({ lat, lon }: { lat: number, lon: number }) {
 }
 
 export async function getLocation(id: number) {
+    const cacheKey = `${LOCATION_CACHE_VERSION}:${id}`;
+    if (await hasCache(cacheKey)) {
+        return await getCache<Location>(cacheKey);
+    }
+
     const Gdal = await initGdalJs();
     const result = await Gdal.open(MAP_FILE);
     const dataset = result.datasets[0];
@@ -92,13 +106,15 @@ export async function getLocation(id: number) {
         const [lon, lat] = transformed[0];
 
         const nominatim = await getCountry({ lat, lon });
-
-        return {
+        const location: Location = {
             lon,
             lat,
             country_code: nominatim.address["country_code"],
             "ISO3166-2-lvl4": nominatim.address["ISO3166-2-lvl4"],
-        }
+        };
+
+        await setCache(cacheKey, location);
+        return location;
     } finally {
         await Gdal.close(dataset);
     }
