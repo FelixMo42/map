@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { getLocation } from './src/location.ts';
+import { getLocation } from '#src/location';
 
 function getRandomId(pop: number = 8298979488) {
     return Math.floor(Math.random() * (pop + 1));

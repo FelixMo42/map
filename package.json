@@ -2,7 +2,8 @@
   "name": "average-people",
   "version": "0.0.0",
   "scripts": {
-    "person": "node cli.ts"
+    "person": "node cli.ts",
+    "test": "node test/index.ts"
   },
   "type": "module",
   "dependencies": {
@@ -11,5 +12,9 @@
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
+  },
+  "imports": {
+    "#src/*": "./src/*.ts",
+    "#test/*": "./test/*.ts"
   }
 }

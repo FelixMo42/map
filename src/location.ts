@@ -1,8 +1,8 @@
 import initGdalJs from 'gdal3.js/node.js';
 import { fromFile, GeoTIFFImage } from 'geotiff';
-import { mulberry32 } from './mulberry32.ts';
-import { USER_AGENT } from './config.ts';
-import { get as getCache, has as hasCache, set as setCache } from './cache.ts';
+import { mulberry32 } from '#src/utils/mulberry32';
+import { USER_AGENT } from '#src/config';
+import { get as getCache, has as hasCache, set as setCache } from '#src/utils/cache';
 
 const MAP_FILE = 'data/map.tif'
 const LOCATION_CACHE_VERSION = 'getLocation:v1';
