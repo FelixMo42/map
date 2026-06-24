@@ -44,7 +44,7 @@ export async function has(name: string) {
 
 export async function get<T>(name: string) {
     const cache = await loadCache();
-    return cache[name] as T | undefined;
+    return cache[name] as T;
 }
 
 export async function set<T>(name: string, value: T) {

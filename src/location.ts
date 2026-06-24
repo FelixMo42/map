@@ -1,8 +1,8 @@
 import initGdalJs from 'gdal3.js/node.js';
 import { fromFile, GeoTIFFImage } from 'geotiff';
-import { mulberry32 } from '#src/mulberry32';
+import { mulberry32 } from '#src/utils/mulberry32';
 import { USER_AGENT } from '#src/config';
-import { get as getCache, has as hasCache, set as setCache } from '#src/cache';
+import { get as getCache, has as hasCache, set as setCache } from '#src/utils/cache';
 
 const MAP_FILE = 'data/map.tif'
 const LOCATION_CACHE_VERSION = 'getLocation:v1';
@@ -73,6 +73,7 @@ export async function getCountry({ lat, lon }: { lat: number, lon: number }) {
 }
 
 export async function getLocation(id: number) {
+    console.log(`Getting location for #${id}`);
     const cacheKey = `${LOCATION_CACHE_VERSION}:${id}`;
     if (await hasCache(cacheKey)) {
         return await getCache<Location>(cacheKey);
