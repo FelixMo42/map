@@ -73,7 +73,6 @@ export async function getCountry({ lat, lon }: { lat: number, lon: number }) {
 }
 
 export async function getLocation(id: number) {
-    console.log(`Getting location for #${id}`);
     const cacheKey = `${LOCATION_CACHE_VERSION}:${id}`;
     if (await hasCache(cacheKey)) {
         return await getCache<Location>(cacheKey);
